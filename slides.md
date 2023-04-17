@@ -256,3 +256,7 @@ Worst case we just start a new --dev chain with the new runtime installed.
 * Open issues and PRs
 
 Let us know what you want from Tuxedo
+
+Notes:
+
+We would be happy to help you write your runtime until you get the hang of it.
