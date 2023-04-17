@@ -110,6 +110,30 @@ Having considered this motivating example, lets generalize the big picture diffe
 
 ---v
 
+## UTXO for offchain worker/sidechains
+* Since in the UTXO model you must in a any given input set only spend a single UTXO we can utilize this for performance.
+<img style="width: 500px" src="utxo_sidechains.svg">
+
+---
+
+## Accounts for offchain worker/sidechains
+
+* In comparison it can be quite complicated for the accounts model in this regard.
+<img style="width: 500px" src="accounts_sidechains.svg">
+
+---
+
+## Zero-knowledge with UTXOS
+
+* We have some amount of UTXOS (For someone) Utxo1(pubkey, val=1) Utxo2(pubkey, val=2) .. etc
+* We want to prove that we can indeed spend 4 without revealing which utxos will be spent or our pubkey.
+* So what we want to prove is:
+    1. I control a particular key which can spend some number of utxos which can sum to 4
+    2. The UTXO/s are infact valid and unspent
+    3. The UTXO/s are atleast a value of 4
+
+---
+
 ## Another Example
 
 TODO Decide which example to use. Some ideas:
