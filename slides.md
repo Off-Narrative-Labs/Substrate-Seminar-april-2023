@@ -234,6 +234,11 @@ Having considered this motivating example, lets generalize the big picture diffe
 
 ## UTXO for offchain worker/sidechains
 * Since in the UTXO model you must in a any given input set only spend a single UTXO we can utilize this for performance.
+
+---v
+
+## UTXO sidechain
+
 <img style="width: 500px" src="utxo_sidechains.svg">
 
 ---v
@@ -241,6 +246,10 @@ Having considered this motivating example, lets generalize the big picture diffe
 ## Accounts for offchain worker/sidechains
 
 * In comparison it can be quite complicated for the accounts model in this regard.
+
+---v
+## Accounts sidechain
+
 <img style="width: 500px" src="accounts_sidechains.svg">
 
 ---v
