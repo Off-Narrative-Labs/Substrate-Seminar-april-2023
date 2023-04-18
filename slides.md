@@ -13,7 +13,6 @@ Write UTXO-based Substrate Runtimes
 * Migrated to Twitch
 * Handed off to Lauren and Aaron
 
-
 Notes:
 
 Spend ~5 min talking about seminar itself and this new era that Lauren and Aaron are ushering in
@@ -168,7 +167,8 @@ There will be more blog frameworks in the future that aren't even existing yet.
 
 # Accounts vs UTXOs
 
-Steal any content from Andrew's academy lesson?
+* Accounts - Great for reducing State bloat, not so great for privacy. Great for general computation, Not so great for parallelization 
+* UTXOS - Great for privacy, Not so great for State bloat, Not so great in terms of general computation(for now!), great for parallelization  
 
 ---v
 
@@ -239,7 +239,7 @@ Having considered this motivating example, lets generalize the big picture diffe
 
 ## UTXO sidechain
 
-<img style="width: 500px" src="utxo_sidechains.svg">
+<img style="width: 600px" src="utxo_sidechains.svg">
 
 ---v
 
@@ -250,7 +250,7 @@ Having considered this motivating example, lets generalize the big picture diffe
 ---v
 ## Accounts sidechain
 
-<img style="width: 500px" src="accounts_sidechains.svg">
+<img style="width: 600px" src="accounts_sidechains.svg">
 
 ---v
 
