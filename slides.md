@@ -361,29 +361,98 @@ For the sake of testing the chain out, we need an easy way to get our hands on s
 
 A **framework** for writing **Substrate Runtimes** that are based on the **UTXO model**.
 
-* Github:
-* Rustdocs:
+* Github: https://github.com/Off-Narrative-Labs/Tuxedo/
+* Rustdocs: https://off-narrative-labs.github.io/Tuxedo/tuxedo_core/index.html
 
 ---v
 
 ## The Transaction Type
 
-TODO Diagram
-TODO Rustdocs link
+```rust
+pub struct Transaction<V, C> {
+    pub inputs: Vec<Input>,
+    pub outputs: Vec<Output<V>>,
+    pub checker: C,
+}
+```
+[Rustdocs](https://off-narrative-labs.github.io/Tuxedo/tuxedo_core/types/struct.Transaction.html)
+
+Notes:
+
+Lists all the exact state to be consumed. Lists all the exact state to be produced. constraint checker is kind of like FRAME's `Call` enum.
+
+When we check a transaction:
+* No duplicate inputs
+* All inputs exist
+* All inputs verifiers are properly redeemed
+* No conflicting outputs exist
+* The constraint checker is satisfied
 
 ---v
 
 ## The Verifier Trait
 
-TODO Rustdocs link
+```rust
+pub trait Verifier: Debug + Encode + Decode + Clone {
+    fn verify(&self, simplified_tx: &[u8], redeemer: &[u8]) -> bool;
+}
+```
+
+[Rustdocs](https://off-narrative-labs.github.io/Tuxedo/tuxedo_core/verifier/trait.Verifier.html)
+
+Notes:
+
+The verifier operates on the level of an individual input. Each input's verifier is checked independently. The verifier typically represents a cryptographic signature, but there is room for creativity here.
 
 ---v
 
 ## The ConstraintChecker Trait
 
-TODO Rustdocs link
+```rust
+pub trait ConstraintChecker: Debug + Encode + Decode + Clone {
+    /// The error type that this constraint checker may return
+    type Error: Debug;
+
+    /// The actual check validation logic
+    fn check<V: Verifier>(
+        &self,
+        inputs: &[Output<V>],
+        outputs: &[Output<V>],
+    ) -> Result<TransactionPriority, Self::Error>;
+}
+```
+
+[Rustdocs](https://off-narrative-labs.github.io/Tuxedo/tuxedo_core/constraint_checker/trait.ConstraintChecker.html)
 
 ---v
+
+## Simple Constraint Checker
+
+```rust
+pub trait SimpleConstraintChecker: Debug + Encode + Decode + Clone {
+    /// The error type that this constraint checker may return
+    type Error: Debug;
+
+    /// The actual check validation logic
+    fn check(
+        &self,
+        input_data: &[DynamicallyTypedData],
+        output_data: &[DynamicallyTypedData],
+    ) -> Result<TransactionPriority, Self::Error>;
+}
+```
+
+[Rustdocs](https://off-narrative-labs.github.io/Tuxedo/tuxedo_core/constraint_checker/trait.SimpleConstraintChecker.html)
+
+Notes:
+
+This trait is very similar to constraint checker, but provides less contextual information to the implementor.
+This trait only provides the dynamically typed data enclosed in each output.
+It does not contain the verifiers.
+In many cases this information is sufficient and the simpler trait is preferable.
+In other cases you may want to enforce constraints on the relationship between verifiers.
+
+---
 
 ## Tuxedo Pieces
 
@@ -397,9 +466,22 @@ Analogous to FRAME pallets.
 
 ## Aggregation
 
-TODO rustdocs link
+```rust
+#[tuxedo_verifier]
+pub enum OuterVerifier {
+    SigCheck(SigCheck),
+    UpForGrabs(UpForGrabs),
+    ThresholdMultiSignature(ThresholdMultiSignature),
+}
+```
+
+[`tuxedo_verifier` rustdocs](https://off-narrative-labs.github.io/Tuxedo/tuxedo_core/attr.tuxedo_verifier.html)
+[`tuxedo-constraint-checker` rustdocs](https://off-narrative-labs.github.io/Tuxedo/tuxedo_core/attr.tuxedo_constraint_checker.html)
 
 Notes:
+This code snippet is from the tuxedo template runtime.
+It shows how we aggregate out verifiers into an outer verifier.
+
 This is similar to how FRAME works in many ways, but also different.
 
 There are many outer types. We make the developer explicitly write each outer enum. This is a little more code
@@ -411,6 +493,10 @@ of related pieces and configurations together.
 ## The Executive Type
 
 The `Executive` type is provided by Tuxedo core and implements all the Runtime APIs
+
+[Rustdocs](https://off-narrative-labs.github.io/Tuxedo/tuxedo_core/struct.Executive.html)
+
+Notes:
 
 ---
 
