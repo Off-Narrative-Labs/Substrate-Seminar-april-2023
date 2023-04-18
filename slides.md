@@ -18,15 +18,42 @@ Notes:
 
 Spend ~5 min talking about seminar itself and this new era that Lauren and Aaron are ushering in
 
-Joshy tell story of very first seminar
+Joshy tell story of very first seminar and what a shit show it was and how much seminar has grown and evolved.
 
 ---v
 
-## About Us
+## Off-Narrative Labs
 
-TODO icons etc
+<div style="float: left; width: 33%">
+
+Andrew
+![](./coax1d.png)
+
+[Github](https://github.com/coax1d/)
+
+</div>
+<div style="float: left; width: 33%">
+
+Off Narrative Labs
+![](./Off-Narrative-Labs.png)
+
+[Github](https://github.com/Off-Narrative-Labs/)
+
+</div>
+<div style="float: left; width: 33%">
+
+Joshy
+![](./JoshOrndorff.jpg)
+
+[Github](https://github.com/JoshOrndorff/)
+
+</div>
 
 Notes:
+
+Andrew and Joshy each self-intro
+
+For sure talk about meeting at the first academy, doing the UTXO final project, teaching together at the second academy where we met Lauren and Aaron.
 
 ---v
 
