@@ -254,17 +254,40 @@ Having considered this motivating example, lets generalize the big picture diffe
     2. The UTXO/s are infact valid and unspent
     3. The UTXO/s are atleast a value of 4
 
----v
+---
 
-## Order Book DEX Example
+# <small>Order Book DEX Example</small>
 
-* A Decentralize Exchange
+* A Decentralized Exchange
 * NOT an Automated Market Maker
 * Users trade directly with each other
 
-TODO Diagram of buy and sell orders
+<div style="display: flex;" >
+  <div style="flex: 45%;">
 
-More Fundamentals: https://blog.atani.com/dex-orderbook-vs-liquidity-pool/
+```json
+{
+  "side": "buy",
+  "token_a": 150,
+  "token_b": 200, 
+}
+```
+
+  </div>
+  <div style="flex: 45%;">
+
+```json
+{
+  "side": "sell",
+  "token_a": 160,
+  "token_b": 190, 
+}
+```
+
+  </div>
+</div>
+
+[More Fundamentals](https://blog.atani.com/dex-orderbook-vs-liquidity-pool/)
 
 Notes:
 Now let's consider how a more complex application might look in both frameworks.
@@ -278,6 +301,59 @@ Decentralized exchanges operate on-chain and eliminate the need to trust the cen
 This is not well suited for UTXOs. When sending UTXO transactions, you specify the exact pre-state that you are going to consume. Therefore, you know the exact price you will get and the exact outcome of the transaction. However, it is very inconvenient for users because they are constantly racing to consume the state of the AMM.
 
 In a UTXO setting, it makes more sense to use the order book model that centralized exchanges previously took.
+
+---v
+
+## Sorting the Order Book
+
+![](./depth-chart.png)
+
+Notes:
+
+When you run the order book, it is useful to keep the orders sorted so that you can see when the buys and sells overlap and matches can be made.
+
+If you want to do your match-making on-chain you will need to store your orders this way. This may be expensive. OTOH, you can move the computation of making a match offchain and allow anyone who happens to spot a match, submit a transaction and get a reward. We will take this second approach.
+
+It is common, in the UTXO model, that you can move computation offchain and only require verification on-chain in a way that feels natural.
+
+---v
+## Order Book Actions
+
+<div style="display: flex;" >
+  <div style="flex: 33%;">
+
+Core
+
+* Place Order
+* Make Match
+
+</div>
+<div style="flex: 33%;">
+
+Enhancement
+
+* Cancel Order
+* Take Order
+
+</div>
+<div style="flex: 33%;">
+
+Development
+
+* Mint Token A
+* Mint Token B
+
+</div>
+</div>
+
+Notes:
+
+The primary actions in the dex are placing orders, and settling orders by matching them with compatible counterparts. A few nice-to-haves that make it more user-friendly would include
+* The ability to cancel an order that you are no longer interested in. As a workaround, you could make an exact opposite order and match them (if you have enough collateral)
+* The ability to take the exact opposite position as an existing order. This is basically an atomic action for making the opposite order and matching them together.
+* The ability to partially fill orders. This is essential for a real-life dex, but for learning, we can skip it.
+
+For the sake of testing the chain out, we need an easy way to get our hands on some of each of the tokens that we are trading. For that, we will have a way to mint each of them.
 
 ---
 
