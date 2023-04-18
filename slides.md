@@ -476,6 +476,7 @@ pub enum OuterVerifier {
 ```
 
 [`tuxedo_verifier` rustdocs](https://off-narrative-labs.github.io/Tuxedo/tuxedo_core/attr.tuxedo_verifier.html)
+
 [`tuxedo-constraint-checker` rustdocs](https://off-narrative-labs.github.io/Tuxedo/tuxedo_core/attr.tuxedo_constraint_checker.html)
 
 Notes:
