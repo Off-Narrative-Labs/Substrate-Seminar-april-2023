@@ -86,19 +86,23 @@ This seminar is an opportunity for us to try out or beta test our plan for the d
 
 ## The Runtime
 
-TODO steal Shawn's game console graphics or use something similar
+<img src="./nintendo-game-polkadot.png" style="height: 300px;" />
+<img src="./nintendo-console.png" style="height: 300px;" />
 
-* Write runtime from scratch
-* Write runtime using FRAME
-* Write runtime using Tuxedo
-* Hopefully more frameworks to come
-
+<img src="./nintendo-game-moonbeam.png" class="fragment" style="height: 300px; position: absolute; left: 100px; top: 150px;" />
+<img src="./nintendo-game-scratch.png" class="fragment" style="height: 300px; position: absolute; left: 150px; top: 200px;" />
+<img src="./nintendo-game-dex.png" class="fragment" style="height: 300px; position: absolute; left: 200px; top: 250px;" />
 
 Notes:
 
 Typically when you dive in to the runtime. This is where people start talking about FRAME and pallets.
 But FRAME is just one of many ways to write a runtime. In fact, you can write a runtime entirely from scratch.
 All you have to do is implement those runtime apis we saw. We do this at the academy.
+
+* Write runtime from scratch
+* Write runtime using FRAME
+* Write runtime using Tuxedo
+* Hopefully more frameworks to come
 
 Blog analogy:
 
