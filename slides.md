@@ -201,6 +201,7 @@ This is not well suited for UTXOs. When sending UTXO transactions, you specify t
 
 In a UTXO setting, it makes more sense to use the order book model that centralized exchanges previously took.
 
+---
 
 # Tuxedo
 
