@@ -28,6 +28,19 @@ TODO icons etc
 
 Notes:
 
+---v
+
+## About Tuxedo
+
+Web 3 Grant: https://github.com/w3f/Grants-Program/blob/master/applications/tuxedo.md
+
+Milestones:
+- ✅ Core Tuxedo Functionality
+- ✅ Template wallet
+- 🏗️ Full Documentation and Tutorial
+
+Notes:
+This seminar is an opportunity for us to try out or beta test our plan for the docs and tutorial that we will deliver for The third milestone which we plan to submit in about two weeks.
 
 ---
 
@@ -71,7 +84,7 @@ There will be more blog frameworks in the future that aren't even existing yet.
 
 # Accounts vs UTXOs
 
-Steal content from Adrew's academy lesson?
+Steal content from Andrew's academy lesson?
 
 ---v
 
@@ -114,14 +127,14 @@ Having considered this motivating example, lets generalize the big picture diffe
 * Since in the UTXO model you must in a any given input set only spend a single UTXO we can utilize this for performance.
 <img style="width: 500px" src="utxo_sidechains.svg">
 
----
+---v
 
 ## Accounts for offchain worker/sidechains
 
 * In comparison it can be quite complicated for the accounts model in this regard.
 <img style="width: 500px" src="accounts_sidechains.svg">
 
----
+---v
 
 ## Zero-knowledge with UTXOS
 
@@ -132,20 +145,31 @@ Having considered this motivating example, lets generalize the big picture diffe
     2. The UTXO/s are infact valid and unspent
     3. The UTXO/s are atleast a value of 4
 
----
+---v
 
-## Another Example
+## Order Book DEX Example
 
-TODO Decide which example to use. Some ideas:
+* A Decentralize Exchange
+* NOT an Automated Market Maker
+* Users trade directly with each other
 
-* Order Book Dex
-* Multisig
-* On-chain Voting
+TODO Diagram of buy and sell orders
+
+More Fundamentals: https://blog.atani.com/dex-orderbook-vs-liquidity-pool/
 
 Notes:
 Now let's consider how a more complex application might look in both frameworks.
 
-Maybe the example we choose here should be the one we live code later.
+We will live code on this project together later in the seminar. For now we'll do some design.
+
+Centralized exchanges like Kraken or Poloniex have existed since Mt Gox. They typically operate as an order book. Customers place Orders which are agreements to make a trade of some token for some other token at a given price. The Exchange matches customer orders, and usually gets a profit on the difference, plus sometimes an explicit trading fee.
+
+Decentralized exchanges operate on-chain and eliminate the need to trust the centralized exchange operator. They exist on many chains like Ethereum. On Ethereum they are mostly based on automated market makers. This design is well suited for an accounts model. When two users interact with the DEX around the same time, they don't know which one will be applied first, and therefore, don't know which one will get the better price.
+
+This is not well suited for UTXOs. When sending UTXO transactions, you specify the exact pre-state that you are going to consume. Therefore, you know the exact price you will get and the exact outcome of the transaction. However, it is very inconvenient for users because they are constantly racing to consume the state of the AMM.
+
+In a UTXO setting, it makes more sense to use the order book model that centralized exchanges previously took.
+
 
 # Tuxedo
 
@@ -239,13 +263,15 @@ We aren't quite there yet. Right now it works well with the cryptocurrency, but 
 
 # Live Code
 
-Write a simple Tuxedo piece and add it to the template runtime
+Let's try to implement the ORder Book DEX we discussed.
+
+This will written out as a full tutorial to complete our third milestone.
 
 Notes:
 
-Would be cool to do a runtime upgrade, but we have never tried that. I'm worried ti won't work because we haven't set up opaque extrinsics properly. But if we don't change any types. I guess it should work. Let's see if we have time to try it out or not.
+Would be cool to do a runtime upgrade, but we have never tried that. I'm worried it won't work because we haven't set up opaque extrinsics properly yet. But if we don't change any types. I guess it should work. Let's see if we have time to try it out or not.
 
-Worst case we just start a new --dev chain with the new runtime installed.
+Worst case, we start a new `--dev` chain with the new runtime installed and all is well.
 
 
 ---
