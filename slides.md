@@ -73,14 +73,65 @@ This seminar is an opportunity for us to try out or beta test our plan for the d
 
 # Substrate
 
-* Client vs Runtime
-* TODO Diagram - maybe crib from academy
-* Client runs tx pool, consensus, networking
-* Runtime is application logic. Like one big smart contract that rules the chain.
+![](./Substrate.svg)
+
+Notes:
+
+The client is a normal program that runs natively on a computer. It handles general purpose blockchain administration logic.
+
+* Transaction Pool
+* P2P Networking
+* Fork Awareness and Management
+* RPC Requests
+
+The Runtime is a WebAssembly program that gets executed by the Client.
+
+The client does not have any idea what the runtime does, concretely.
+The runtime just implements some API that the client knows how to call.
 
 ---v
 
-## Runtime APIs and Host Functions
+## Runtime APIs - Core
+
+* [Rust Docs](https://paritytech.github.io/substrate/master/sp_api/trait.Core.html)
+* For executing arbitrary blocks
+```rust
+pub trait Core<Block: BlockT> {
+    fn execute_block(
+        &self,
+        block: Block
+    ) -> Result<(), ApiError>;
+}
+```
+
+---v
+## Runtime APIs - BlockBuilder
+
+* [Rust Docs](https://paritytech.github.io/substrate/master/sp_block_builder/trait.BlockBuilder.html)
+* For authoring your own blocks
+
+```rust
+pub trait BlockBuilder<Block: BlockT> {
+  fn initialize_block(
+      &self,
+      header: &Block::Header
+  ) -> Result<(), ApiError>;
+  fn apply_extrinsic(
+      &self,
+      extrinsic: Block::Extrinsic
+  ) -> Result<ApplyExtrinsicResult, ApiError>;
+  fn finalize_block(
+      &self,
+  ) -> Result<Block::Header, ApiError>;
+}
+```
+
+Notes:
+This is a slightly idealized version of the way the apis are actually implemented. I've omitted the versions of these functions. Learn more at https://paritytech.github.io/substrate/master/sp_api/trait.RuntimeApiInfo.html. I've also shown `initialize_block` in block builder instead of core. Learn more at https://substrate.stackexchange.com/questions/3128
+
+There are also several other runtime APIs for things like off-chain workers and the transaction pool. These are interesting, but not that important and we're not going to dive into them right now. We've shown the main ones.
+
+There are also things called host functions. These allow the runtime to call back into the client to get help with specific subtasks. These aren't really relevant at the level we're discussing here.
 
 ---v
 
@@ -94,6 +145,8 @@ This seminar is an opportunity for us to try out or beta test our plan for the d
 <img src="./nintendo-game-dex.png" class="fragment" style="height: 300px; position: absolute; left: 200px; top: 250px;" />
 
 Notes:
+
+The Runtime represents the application that a particular blockchain runs.
 
 Typically when you dive in to the runtime. This is where people start talking about FRAME and pallets.
 But FRAME is just one of many ways to write a runtime. In fact, you can write a runtime entirely from scratch.
