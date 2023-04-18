@@ -239,7 +239,7 @@ Having considered this motivating example, lets generalize the big picture diffe
 
 ## UTXO sidechain
 
-<img style="width: 600px" src="utxo_sidechains.svg">
+<img style="width: 600px" src="utxo_sidechains.svg" />
 
 ---v
 
@@ -250,7 +250,7 @@ Having considered this motivating example, lets generalize the big picture diffe
 ---v
 ## Accounts sidechain
 
-<img style="width: 600px" src="accounts_sidechains.svg">
+<img style="width: 600px" src="accounts_sidechains.svg" />
 
 ---v
 
