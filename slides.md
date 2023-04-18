@@ -168,19 +168,44 @@ There will be more blog frameworks in the future that aren't even existing yet.
 
 # Accounts vs UTXOs
 
-Steal content from Andrew's academy lesson?
+Steal any content from Andrew's academy lesson?
 
 ---v
 
 ## Cryptocurrency Example
 
-TODO describe account based cryptocurrency and utxo base currency
+<div style="display: flex;" >
+  <div style="flex: 45%; margin: 30px;">
+
+  Accounts:
+
+  | Address | Balance  |
+  | ------- | -------- |
+  | 0xA11ce | 50 coins |
+  | 0xB0bbb | 10 coins |
+
+  </div>
+  <div style="flex: 55%; margin: 30px;">
+
+  UTXOs:
+
+  | Serial | Address | Amount   |
+  | ------ | ------- | -------- |
+  | 0x1111 | 0xA11ce | 50 coins |
+  | 0x2222 | 0xB0bbb | 2 coins  |
+  | 0x3333 | 0xB0bbb | 4 coins  |
+  | 0x4444 | 0xB0bbb | 4 coins  |
+
+  </div>
+</div>
 
 Notes:
 
-First let's consider the example of cryptocurrency
+First let's consider the example of cryptocurrency.
 
-...
+In the accounts model, each address is mapped to a balance. There is a special storage key for each address that holds the accounts balance. The balance is a single value that is the sum of all the accounts previous dealings.
+
+In the UTXO model, the storage addresses are the coin's serial numbers (which are calculated based on the transaction that includes them). There is no single or global place to check an address's balance. You have to know about all the UTXOs and sum them up.
 
 Having considered this motivating example, lets generalize the big picture differences between the models
 
